@@ -30,7 +30,6 @@
 #include <vector>
 #include <list>
 #include <cstdio>
-#include <stdarg.h>
 
 
 // Implementation access definitions.
@@ -150,22 +149,22 @@ namespace Yaml
             }
         }
 
-        virtual const std::string & GetData() const
+        virtual const std::string & GetData() const override
         {
             return g_EmptyString;
         }
 
-        virtual bool SetData(const std::string & data)
+        virtual bool SetData(const std::string & data) override
         {
             return false;
         }
 
-        virtual size_t GetSize() const
+        virtual size_t GetSize() const override
         {
             return m_Sequence.size();
         }
 
-        virtual Node * GetNode(const size_t index)
+        virtual Node * GetNode(const size_t index) override
         {
             auto it = m_Sequence.find(index);
             if(it != m_Sequence.end())
@@ -175,12 +174,12 @@ namespace Yaml
             return nullptr;
         }
 
-        virtual Node * GetNode(const std::string & key)
+        virtual Node * GetNode(const std::string & key) override
         {
             return nullptr;
         }
 
-        virtual Node * Insert(const size_t index)
+        virtual Node * Insert(const size_t index) override
         {
             if(m_Sequence.size() == 0)
             {
@@ -214,7 +213,7 @@ namespace Yaml
             return pNode;
         }
 
-        virtual Node * PushFront()
+        virtual Node * PushFront() override
         {
             for(auto it = m_Sequence.cbegin(); it != m_Sequence.cend(); it++)
             {
@@ -226,7 +225,7 @@ namespace Yaml
             return pNode;
         }
 
-        virtual Node * PushBack()
+        virtual Node * PushBack() override
         {
             size_t index = 0;
             if(m_Sequence.size())
@@ -241,7 +240,7 @@ namespace Yaml
             return pNode;
         }
 
-        virtual void Erase(const size_t index)
+        virtual void Erase(const size_t index) override
         {
             auto it = m_Sequence.find(index);
             if(it == m_Sequence.end())
@@ -252,7 +251,7 @@ namespace Yaml
             m_Sequence.erase(index);
         }
 
-        virtual void Erase(const std::string & key)
+        virtual void Erase(const std::string & key) override
         {
         }
 
@@ -273,27 +272,27 @@ namespace Yaml
             }
         }
 
-        virtual const std::string & GetData() const
+        virtual const std::string & GetData() const override
         {
             return g_EmptyString;
         }
 
-        virtual bool SetData(const std::string & data)
+        virtual bool SetData(const std::string & data) override
         {
             return false;
         }
 
-        virtual size_t GetSize() const
+        virtual size_t GetSize() const override
         {
             return m_Map.size();
         }
 
-        virtual Node * GetNode(const size_t index)
+        virtual Node * GetNode(const size_t index) override
         {
             return nullptr;
         }
 
-        virtual Node * GetNode(const std::string & key)
+        virtual Node * GetNode(const std::string & key) override
         {
             auto it = m_Map.find(key);
             if(it == m_Map.end())
@@ -305,26 +304,26 @@ namespace Yaml
             return it->second;
         }
 
-        virtual Node * Insert(const size_t index)
+        virtual Node * Insert(const size_t index) override
         {
             return nullptr;
         }
 
-        virtual Node * PushFront()
+        virtual Node * PushFront() override
         {
             return nullptr;
         }
 
-        virtual Node * PushBack()
+        virtual Node * PushBack() override
         {
             return nullptr;
         }
 
-        virtual void Erase(const size_t index)
+        virtual void Erase(const size_t index) override
         {
         }
 
-        virtual void Erase(const std::string & key)
+        virtual void Erase(const std::string & key) override
         {
             auto it = m_Map.find(key);
             if(it == m_Map.end())
@@ -348,52 +347,52 @@ namespace Yaml
         {
         }
 
-        virtual const std::string & GetData() const
+        virtual const std::string & GetData() const override
         {
             return m_Value;
         }
 
-        virtual bool SetData(const std::string & data)
+        virtual bool SetData(const std::string & data) override
         {
             m_Value = data;
             return true;
         }
 
-        virtual size_t GetSize() const
+        virtual size_t GetSize() const override
         {
             return 0;
         }
 
-        virtual Node * GetNode(const size_t index)
+        virtual Node * GetNode(const size_t index) override
         {
             return nullptr;
         }
 
-        virtual Node * GetNode(const std::string & key)
+        virtual Node * GetNode(const std::string & key) override
         {
             return nullptr;
         }
 
-        virtual Node * Insert(const size_t index)
+        virtual Node * Insert(const size_t index) override
         {
             return nullptr;
         }
 
-        virtual Node * PushFront()
+        virtual Node * PushFront() override
         {
             return nullptr;
         }
 
-        virtual Node * PushBack()
+        virtual Node * PushBack() override
         {
             return nullptr;
         }
 
-        virtual void Erase(const size_t index)
+        virtual void Erase(const size_t index) override
         {
         }
 
-        virtual void Erase(const std::string & key)
+        virtual void Erase(const std::string & key) override
         {
         }
 
@@ -497,26 +496,26 @@ namespace Yaml
 
     public:
 
-        virtual Node::eType GetType() const
+        virtual Node::eType GetType() const override
         {
             return Node::SequenceType;
         }
 
-        virtual void InitBegin(SequenceImp * pSequenceImp)
+        virtual void InitBegin(SequenceImp * pSequenceImp) override
         {
             m_Iterator = pSequenceImp->m_Sequence.begin();
         }
 
-        virtual void InitEnd(SequenceImp * pSequenceImp)
+        virtual void InitEnd(SequenceImp * pSequenceImp) override
         {
             m_Iterator = pSequenceImp->m_Sequence.end();
         }
 
-        virtual void InitBegin(MapImp * pMapImp)
+        virtual void InitBegin(MapImp * pMapImp) override
         {
         }
 
-        virtual void InitEnd(MapImp * pMapImp)
+        virtual void InitEnd(MapImp * pMapImp) override
         {
         }
 
@@ -534,25 +533,25 @@ namespace Yaml
 
     public:
 
-        virtual Node::eType GetType() const
+        virtual Node::eType GetType() const override
         {
             return Node::MapType;
         }
 
-        virtual void InitBegin(SequenceImp * pSequenceImp)
+        virtual void InitBegin(SequenceImp * pSequenceImp) override
         {
         }
 
-        virtual void InitEnd(SequenceImp * pSequenceImp)
+        virtual void InitEnd(SequenceImp * pSequenceImp) override
         {
         }
 
-        virtual void InitBegin(MapImp * pMapImp)
+        virtual void InitBegin(MapImp * pMapImp) override
         {
             m_Iterator = pMapImp->m_Map.begin();
         }
 
-        virtual void InitEnd(MapImp * pMapImp)
+        virtual void InitEnd(MapImp * pMapImp) override
         {
             m_Iterator = pMapImp->m_Map.end();
         }
@@ -571,26 +570,26 @@ namespace Yaml
 
     public:
 
-        virtual Node::eType GetType() const
+        virtual Node::eType GetType() const override
         {
             return Node::SequenceType;
         }
 
-        virtual void InitBegin(SequenceImp * pSequenceImp)
+        virtual void InitBegin(SequenceImp * pSequenceImp) override
         {
             m_Iterator = pSequenceImp->m_Sequence.begin();
         }
 
-        virtual void InitEnd(SequenceImp * pSequenceImp)
+        virtual void InitEnd(SequenceImp * pSequenceImp) override
         {
             m_Iterator = pSequenceImp->m_Sequence.end();
         }
 
-        virtual void InitBegin(MapImp * pMapImp)
+        virtual void InitBegin(MapImp * pMapImp) override
         {
         }
 
-        virtual void InitEnd(MapImp * pMapImp)
+        virtual void InitEnd(MapImp * pMapImp) override
         {
         }
 
@@ -608,25 +607,25 @@ namespace Yaml
 
     public:
 
-        virtual Node::eType GetType() const
+        virtual Node::eType GetType() const override
         {
             return Node::MapType;
         }
 
-        virtual void InitBegin(SequenceImp * pSequenceImp)
+        virtual void InitBegin(SequenceImp * pSequenceImp) override
         {
         }
 
-        virtual void InitEnd(SequenceImp * pSequenceImp)
+        virtual void InitEnd(SequenceImp * pSequenceImp) override
         {
         }
 
-        virtual void InitBegin(MapImp * pMapImp)
+        virtual void InitBegin(MapImp * pMapImp) override
         {
             m_Iterator = pMapImp->m_Map.begin();
         }
 
-        virtual void InitEnd(MapImp * pMapImp)
+        virtual void InitEnd(MapImp * pMapImp) override
         {
             m_Iterator = pMapImp->m_Map.end();
         }
@@ -654,14 +653,16 @@ namespace Yaml
         {
             switch(m_Type)
             {
-            case SequenceType:
-                delete static_cast<SequenceIteratorImp*>(m_pImp);
-                break;
-            case MapType:
-                delete static_cast<MapIteratorImp*>(m_pImp);
-                break;
-            default:
-                break;
+              case SequenceType:
+                  delete static_cast<SequenceIteratorImp*>(m_pImp);
+                  break;
+              case MapType:
+                  delete static_cast<MapIteratorImp*>(m_pImp);
+                  break;
+              case None:
+                  break;
+              default:
+                  break;
             }
 
         }
@@ -680,13 +681,15 @@ namespace Yaml
         {
             switch(m_Type)
             {
-            case SequenceType:
-                delete static_cast<SequenceIteratorImp*>(m_pImp);
+              case SequenceType:
+                  delete static_cast<SequenceIteratorImp*>(m_pImp);
+                  break;
+              case MapType:
+                  delete static_cast<MapIteratorImp*>(m_pImp);
+                  break;
+              case None:
                 break;
-            case MapType:
-                delete static_cast<MapIteratorImp*>(m_pImp);
-                break;
-            default:
+              default:
                 break;
             }
             m_pImp = nullptr;
@@ -697,18 +700,20 @@ namespace Yaml
 
         switch(it.m_Type)
         {
-        case SequenceType:
-            m_Type = SequenceType;
-            pNewImp = new SequenceIteratorImp;
-            static_cast<SequenceIteratorImp*>(pNewImp)->m_Iterator = static_cast<SequenceIteratorImp*>(it.m_pImp)->m_Iterator;
+          case SequenceType:
+              m_Type = SequenceType;
+              pNewImp = new SequenceIteratorImp;
+              static_cast<SequenceIteratorImp*>(pNewImp)->m_Iterator = static_cast<SequenceIteratorImp*>(it.m_pImp)->m_Iterator;
+              break;
+          case MapType:
+              m_Type = MapType;
+              pNewImp = new MapIteratorImp;
+              static_cast<MapIteratorImp*>(pNewImp)->m_Iterator = static_cast<MapIteratorImp*>(it.m_pImp)->m_Iterator;
+              break;
+          case None:
             break;
-        case MapType:
-            m_Type = MapType;
-            pNewImp = new MapIteratorImp;
-            static_cast<MapIteratorImp*>(pNewImp)->m_Iterator = static_cast<MapIteratorImp*>(it.m_pImp)->m_Iterator;
-            break;
-        default:
-            break;
+          default:
+              break;
         }
 
         m_pImp = pNewImp;
@@ -719,15 +724,17 @@ namespace Yaml
     {
         switch(m_Type)
         {
-        case SequenceType:
-            return { g_EmptyString, *(static_cast<SequenceIteratorImp*>(m_pImp)->m_Iterator->second)};
+          case SequenceType:
+              return { g_EmptyString, *(static_cast<SequenceIteratorImp*>(m_pImp)->m_Iterator->second)};
+              break;
+          case MapType:
+              return {static_cast<MapIteratorImp*>(m_pImp)->m_Iterator->first,
+                      *(static_cast<MapIteratorImp*>(m_pImp)->m_Iterator->second)};
+              break;
+          case None:
             break;
-        case MapType:
-            return {static_cast<MapIteratorImp*>(m_pImp)->m_Iterator->first,
-                    *(static_cast<MapIteratorImp*>(m_pImp)->m_Iterator->second)};
-            break;
-        default:
-            break;
+          default:
+              break;
         }
 
         g_NoneNode.Clear();
@@ -738,14 +745,16 @@ namespace Yaml
     {
         switch(m_Type)
         {
-        case SequenceType:
-            static_cast<SequenceIteratorImp*>(m_pImp)->m_Iterator++;
+          case SequenceType:
+              static_cast<SequenceIteratorImp*>(m_pImp)->m_Iterator++;
+              break;
+          case MapType:
+              static_cast<MapIteratorImp*>(m_pImp)->m_Iterator++;
+              break;
+          case None:
             break;
-        case MapType:
-            static_cast<MapIteratorImp*>(m_pImp)->m_Iterator++;
-            break;
-        default:
-            break;
+          default:
+              break;
         }
         return *this;
     }
@@ -754,14 +763,16 @@ namespace Yaml
     {
         switch(m_Type)
         {
-        case SequenceType:
-            static_cast<SequenceIteratorImp*>(m_pImp)->m_Iterator--;
+          case SequenceType:
+              static_cast<SequenceIteratorImp*>(m_pImp)->m_Iterator--;
+              break;
+          case MapType:
+              static_cast<MapIteratorImp*>(m_pImp)->m_Iterator--;
+              break;
+          case None:
             break;
-        case MapType:
-            static_cast<MapIteratorImp*>(m_pImp)->m_Iterator--;
-            break;
-        default:
-            break;
+          default:
+              break;
         }
         return *this;
     }
@@ -775,14 +786,16 @@ namespace Yaml
 
         switch(m_Type)
         {
-        case SequenceType:
-            return static_cast<SequenceIteratorImp*>(m_pImp)->m_Iterator == static_cast<SequenceIteratorImp*>(it.m_pImp)->m_Iterator;
+          case SequenceType:
+              return static_cast<SequenceIteratorImp*>(m_pImp)->m_Iterator == static_cast<SequenceIteratorImp*>(it.m_pImp)->m_Iterator;
+              break;
+          case MapType:
+              return static_cast<MapIteratorImp*>(m_pImp)->m_Iterator == static_cast<MapIteratorImp*>(it.m_pImp)->m_Iterator;
+              break;
+          case None:
             break;
-        case MapType:
-            return static_cast<MapIteratorImp*>(m_pImp)->m_Iterator == static_cast<MapIteratorImp*>(it.m_pImp)->m_Iterator;
-            break;
-        default:
-            break;
+          default:
+              break;
         }
 
         return false;
@@ -807,14 +820,16 @@ namespace Yaml
         {
             switch(m_Type)
             {
-            case SequenceType:
-                delete static_cast<SequenceConstIteratorImp*>(m_pImp);
+              case SequenceType:
+                  delete static_cast<SequenceConstIteratorImp*>(m_pImp);
+                  break;
+              case MapType:
+                  delete static_cast<MapConstIteratorImp*>(m_pImp);
+                  break;
+              case None:
                 break;
-            case MapType:
-                delete static_cast<MapConstIteratorImp*>(m_pImp);
-                break;
-            default:
-                break;
+              default:
+                  break;
             }
 
         }
@@ -833,14 +848,16 @@ namespace Yaml
         {
             switch(m_Type)
             {
-            case SequenceType:
-                delete static_cast<SequenceConstIteratorImp*>(m_pImp);
+              case SequenceType:
+                  delete static_cast<SequenceConstIteratorImp*>(m_pImp);
+                  break;
+              case MapType:
+                  delete static_cast<MapConstIteratorImp*>(m_pImp);
+                  break;
+              case None:
                 break;
-            case MapType:
-                delete static_cast<MapConstIteratorImp*>(m_pImp);
-                break;
-            default:
-                break;
+              default:
+                  break;
             }
             m_pImp = nullptr;
             m_Type = None;
@@ -850,18 +867,20 @@ namespace Yaml
 
         switch(it.m_Type)
         {
-        case SequenceType:
-            m_Type = SequenceType;
-            pNewImp = new SequenceConstIteratorImp;
-            static_cast<SequenceConstIteratorImp*>(pNewImp)->m_Iterator = static_cast<SequenceConstIteratorImp*>(it.m_pImp)->m_Iterator;
+          case SequenceType:
+              m_Type = SequenceType;
+              pNewImp = new SequenceConstIteratorImp;
+              static_cast<SequenceConstIteratorImp*>(pNewImp)->m_Iterator = static_cast<SequenceConstIteratorImp*>(it.m_pImp)->m_Iterator;
+              break;
+          case MapType:
+              m_Type = MapType;
+              pNewImp = new MapConstIteratorImp;
+              static_cast<MapConstIteratorImp*>(pNewImp)->m_Iterator = static_cast<MapConstIteratorImp*>(it.m_pImp)->m_Iterator;
+              break;
+          case None:
             break;
-        case MapType:
-            m_Type = MapType;
-            pNewImp = new MapConstIteratorImp;
-            static_cast<MapConstIteratorImp*>(pNewImp)->m_Iterator = static_cast<MapConstIteratorImp*>(it.m_pImp)->m_Iterator;
-            break;
-        default:
-            break;
+          default:
+              break;
         }
 
         m_pImp = pNewImp;
@@ -872,15 +891,17 @@ namespace Yaml
     {
         switch(m_Type)
         {
-        case SequenceType:
-            return { g_EmptyString, *(static_cast<SequenceConstIteratorImp*>(m_pImp)->m_Iterator->second)};
+          case SequenceType:
+              return { g_EmptyString, *(static_cast<SequenceConstIteratorImp*>(m_pImp)->m_Iterator->second)};
+              break;
+          case MapType:
+              return {static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator->first,
+                      *(static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator->second)};
+              break;
+          case None:
             break;
-        case MapType:
-            return {static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator->first,
-                    *(static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator->second)};
-            break;
-        default:
-            break;
+          default:
+              break;
         }
 
         g_NoneNode.Clear();
@@ -891,14 +912,16 @@ namespace Yaml
     {
         switch(m_Type)
         {
-        case SequenceType:
-            static_cast<SequenceConstIteratorImp*>(m_pImp)->m_Iterator++;
+          case SequenceType:
+              static_cast<SequenceConstIteratorImp*>(m_pImp)->m_Iterator++;
+              break;
+          case MapType:
+              static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator++;
+              break;
+          case None:
             break;
-        case MapType:
-            static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator++;
-            break;
-        default:
-            break;
+          default:
+              break;
         }
         return *this;
     }
@@ -907,14 +930,16 @@ namespace Yaml
     {
         switch(m_Type)
         {
-        case SequenceType:
-            static_cast<SequenceConstIteratorImp*>(m_pImp)->m_Iterator--;
+          case SequenceType:
+              static_cast<SequenceConstIteratorImp*>(m_pImp)->m_Iterator--;
+              break;
+          case MapType:
+              static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator--;
+              break;
+          case None:
             break;
-        case MapType:
-            static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator--;
-            break;
-        default:
-            break;
+          default:
+              break;
         }
         return *this;
     }
@@ -928,14 +953,16 @@ namespace Yaml
 
         switch(m_Type)
         {
-        case SequenceType:
-            return static_cast<SequenceConstIteratorImp*>(m_pImp)->m_Iterator == static_cast<SequenceConstIteratorImp*>(it.m_pImp)->m_Iterator;
+          case SequenceType:
+              return static_cast<SequenceConstIteratorImp*>(m_pImp)->m_Iterator == static_cast<SequenceConstIteratorImp*>(it.m_pImp)->m_Iterator;
+              break;
+          case MapType:
+              return static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator == static_cast<MapConstIteratorImp*>(it.m_pImp)->m_Iterator;
+              break;
+          case None:
             break;
-        case MapType:
-            return static_cast<MapConstIteratorImp*>(m_pImp)->m_Iterator == static_cast<MapConstIteratorImp*>(it.m_pImp)->m_Iterator;
-            break;
-        default:
-            break;
+          default:
+              break;
         }
 
         return false;
@@ -1102,18 +1129,22 @@ namespace Yaml
 
             switch(NODE_IMP->m_Type)
             {
-            case Node::SequenceType:
-                it.m_Type = Iterator::SequenceType;
-                pItImp = new SequenceIteratorImp;
-                pItImp->InitBegin(static_cast<SequenceImp*>(TYPE_IMP));
+              case Node::SequenceType:
+                  it.m_Type = Iterator::SequenceType;
+                  pItImp = new SequenceIteratorImp;
+                  pItImp->InitBegin(static_cast<SequenceImp*>(TYPE_IMP));
+                  break;
+              case Node::MapType:
+                  it.m_Type = Iterator::MapType;
+                  pItImp = new MapIteratorImp;
+                  pItImp->InitBegin(static_cast<MapImp*>(TYPE_IMP));
+                  break;
+              case Node::ScalarType:
                 break;
-            case Node::MapType:
-                it.m_Type = Iterator::MapType;
-                pItImp = new MapIteratorImp;
-                pItImp->InitBegin(static_cast<MapImp*>(TYPE_IMP));
+              case None:
                 break;
-            default:
-                break;
+              default:
+                  break;
             }
 
             it.m_pImp = pItImp;
@@ -1132,18 +1163,22 @@ namespace Yaml
 
             switch(NODE_IMP->m_Type)
             {
-            case Node::SequenceType:
-                it.m_Type = ConstIterator::SequenceType;
-                pItImp = new SequenceConstIteratorImp;
-                pItImp->InitBegin(static_cast<SequenceImp*>(TYPE_IMP));
+              case Node::SequenceType:
+                  it.m_Type = ConstIterator::SequenceType;
+                  pItImp = new SequenceConstIteratorImp;
+                  pItImp->InitBegin(static_cast<SequenceImp*>(TYPE_IMP));
+                  break;
+              case Node::MapType:
+                  it.m_Type = ConstIterator::MapType;
+                  pItImp = new MapConstIteratorImp;
+                  pItImp->InitBegin(static_cast<MapImp*>(TYPE_IMP));
+                  break;
+              case Node::ScalarType:
                 break;
-            case Node::MapType:
-                it.m_Type = ConstIterator::MapType;
-                pItImp = new MapConstIteratorImp;
-                pItImp->InitBegin(static_cast<MapImp*>(TYPE_IMP));
+              case None:
                 break;
-            default:
-                break;
+              default:
+                  break;
             }
 
             it.m_pImp = pItImp;
@@ -1162,18 +1197,22 @@ namespace Yaml
 
             switch(NODE_IMP->m_Type)
             {
-            case Node::SequenceType:
-                it.m_Type = Iterator::SequenceType;
-                pItImp = new SequenceIteratorImp;
-                pItImp->InitEnd(static_cast<SequenceImp*>(TYPE_IMP));
+              case Node::SequenceType:
+                  it.m_Type = Iterator::SequenceType;
+                  pItImp = new SequenceIteratorImp;
+                  pItImp->InitEnd(static_cast<SequenceImp*>(TYPE_IMP));
+                  break;
+              case Node::MapType:
+                  it.m_Type = Iterator::MapType;
+                  pItImp = new MapIteratorImp;
+                  pItImp->InitEnd(static_cast<MapImp*>(TYPE_IMP));
+                  break;
+              case Node::ScalarType:
                 break;
-            case Node::MapType:
-                it.m_Type = Iterator::MapType;
-                pItImp = new MapIteratorImp;
-                pItImp->InitEnd(static_cast<MapImp*>(TYPE_IMP));
+              case None:
                 break;
-            default:
-                break;
+              default:
+                  break;
             }
 
             it.m_pImp = pItImp;
@@ -1192,18 +1231,22 @@ namespace Yaml
 
             switch(NODE_IMP->m_Type)
             {
-            case Node::SequenceType:
-                it.m_Type = ConstIterator::SequenceType;
-                pItImp = new SequenceConstIteratorImp;
-                pItImp->InitEnd(static_cast<SequenceImp*>(TYPE_IMP));
+              case Node::SequenceType:
+                  it.m_Type = ConstIterator::SequenceType;
+                  pItImp = new SequenceConstIteratorImp;
+                  pItImp->InitEnd(static_cast<SequenceImp*>(TYPE_IMP));
+                  break;
+              case Node::MapType:
+                  it.m_Type = ConstIterator::MapType;
+                  pItImp = new MapConstIteratorImp;
+                  pItImp->InitEnd(static_cast<MapImp*>(TYPE_IMP));
+                  break;
+              case Node::ScalarType:
                 break;
-            case Node::MapType:
-                it.m_Type = ConstIterator::MapType;
-                pItImp = new MapConstIteratorImp;
-                pItImp->InitEnd(static_cast<MapImp*>(TYPE_IMP));
+              case None:
                 break;
-            default:
-                break;
+              default:
+                  break;
             }
 
             it.m_pImp = pItImp;
@@ -1283,7 +1326,7 @@ namespace Yaml
         */
         void UnsetFlag(const eFlag flag)
         {
-            Flags &= ~FlagMask[static_cast<size_t>(flag)];
+            Flags &= (unsigned char)~FlagMask[static_cast<size_t>(flag)];
         }
 
         /**
@@ -1292,7 +1335,7 @@ namespace Yaml
         */
         void UnsetFlags(const unsigned char flags)
         {
-            Flags &= ~flags;
+            Flags &= (unsigned char)~flags;
         }
 
         /**
@@ -1376,7 +1419,7 @@ namespace Yaml
                 //Print();
                 ParseRoot(root);
             }
-            catch(Exception e)
+            catch(Exception &e)
             {
                 root.Clear();
                 throw;
@@ -1426,7 +1469,7 @@ namespace Yaml
                 }
 
                 // Start of document.
-                if (documentStartFound == false && line == "---")
+                if (!documentStartFound && line == "---")
                 {
                     // Erase all lines before this line.
                     ClearLines();
@@ -1485,7 +1528,7 @@ namespace Yaml
                 }
 
                 // Add line.
-                if(foundFirstNotEmpty == false)
+                if(!foundFirstNotEmpty)
                 {
                     if(line.size())
                     {
@@ -1512,13 +1555,13 @@ namespace Yaml
             for (auto it = m_Lines.begin(); it != m_Lines.end();)
             {
                 // Sequence.
-                if (PostProcessSequenceLine(it) == true)
+                if (PostProcessSequenceLine(it))
                 {
                     continue;
                 }
 
                 // Mapping.
-                if (PostProcessMappingLine(it) == true)
+                if (PostProcessMappingLine(it))
                 {
                     continue;
                 }
@@ -1563,7 +1606,7 @@ namespace Yaml
             ReaderLine * pLine = *it;
 
             // Sequence split
-            if (IsSequenceStart(pLine->Data) == false)
+            if (!IsSequenceStart(pLine->Data))
             {
                 return false;
             }
@@ -1645,7 +1688,7 @@ namespace Yaml
             }
 
             // Make sure the value is not a sequence start.
-            if (IsSequenceStart(value) == true)
+            if (IsSequenceStart(value))
             {
                 throw ParsingException(ExceptionMessage(g_ErrorBlockSequenceNotAllowed, *pLine, valueStart));
             }
@@ -1674,7 +1717,7 @@ namespace Yaml
 
             // Add new line with value.
             unsigned char dummyBlockFlags = 0;
-            if(IsBlockScalar(value, pLine->No, dummyBlockFlags) == true)
+            if(IsBlockScalar(value, pLine->No, dummyBlockFlags))
             {
                 newLineOffset = pLine->Offset;
             }
@@ -1747,17 +1790,19 @@ namespace Yaml
             // Handle next line.
             switch(type)
             {
-            case Node::SequenceType:
-                ParseSequence(root, it);
-                break;
-            case Node::MapType:
-                ParseMap(root, it);
-                break;
-            case Node::ScalarType:
-                ParseScalar(root, it);
-                break;
-            default:
-                break;
+              case Node::SequenceType:
+                  ParseSequence(root, it);
+                  break;
+              case Node::MapType:
+                  ParseMap(root, it);
+                  break;
+              case Node::ScalarType:
+                  ParseScalar(root, it);
+                  break;
+              case Node::None:
+                  break;
+              default:
+                  break;
             }
 
             if(it != m_Lines.end())
@@ -1790,17 +1835,19 @@ namespace Yaml
                 Node::eType valueType = (*it)->Type;
                 switch(valueType)
                 {
-                case Node::SequenceType:
-                    ParseSequence(childNode, it);
+                  case Node::SequenceType:
+                      ParseSequence(childNode, it);
+                      break;
+                  case Node::MapType:
+                      ParseMap(childNode, it);
+                      break;
+                  case Node::ScalarType:
+                      ParseScalar(childNode, it);
+                      break;
+                  case Node::None:
                     break;
-                case Node::MapType:
-                    ParseMap(childNode, it);
-                    break;
-                case Node::ScalarType:
-                    ParseScalar(childNode, it);
-                    break;
-                default:
-                    break;
+                  default:
+                      break;
                 }
 
                 // Check next line. if sequence and correct level, go on, else exit.
@@ -1844,17 +1891,19 @@ namespace Yaml
                 Node::eType valueType = (*it)->Type;
                 switch(valueType)
                 {
-                case Node::SequenceType:
-                    ParseSequence(childNode, it);
+                  case Node::SequenceType:
+                      ParseSequence(childNode, it);
+                      break;
+                  case Node::MapType:
+                      ParseMap(childNode, it);
+                      break;
+                  case Node::ScalarType:
+                      ParseScalar(childNode, it);
+                      break;
+                  case Node::None:
                     break;
-                case Node::MapType:
-                    ParseMap(childNode, it);
-                    break;
-                case Node::ScalarType:
-                    ParseScalar(childNode, it);
-                    break;
-                default:
-                    break;
+                  default:
+                      break;
                 }
 
                 // Check next line. if map and correct level, go on, else exit.
@@ -1912,7 +1961,7 @@ namespace Yaml
             }
 
             // Not a block scalar, cut end spaces/tabs
-            if(isBlockScalar == false)
+            if(!isBlockScalar)
             {
                 while(1)
                 {
@@ -1943,7 +1992,7 @@ namespace Yaml
                     data += " ";
                 }
 
-                if(ValidateQuote(data) == false)
+                if(!ValidateQuote(data))
                 {
                     throw ParsingException(ExceptionMessage(g_ErrorInvalidQuote, *pFirstLine));
                 }
@@ -2225,7 +2274,7 @@ namespace Yaml
     void Parse(Node & root, const char * filename)
     {
         std::ifstream f(filename, std::ifstream::binary);
-        if (f.is_open() == false)
+        if (!f.is_open())
         {
             throw OperationException(g_ErrorCannotOpenFile);
         }
@@ -2235,7 +2284,7 @@ namespace Yaml
         f.seekg(0, f.beg);
 
         std::unique_ptr<char[]> data(new char[fileSize]);
-        f.read(data.get(), fileSize);
+        f.read(data.get(), (long)fileSize);
         f.close();
 
         Parse(root, data.get(), fileSize);
@@ -2251,7 +2300,7 @@ namespace Yaml
             pImp->Parse(root, stream);
             delete pImp;
         }
-        catch (const Exception e)
+        catch (const Exception &e)
         {
             delete pImp;
             throw;
@@ -2291,12 +2340,12 @@ namespace Yaml
         Serialize(root, stream, config);
 
         std::ofstream f(filename);
-        if (f.is_open() == false)
+        if (!f.is_open())
         {
             throw OperationException(g_ErrorCannotOpenFile);
         }
 
-        f.write(stream.str().c_str(), stream.str().size());
+        f.write(stream.str().c_str(), (long)stream.str().size());
         f.close();
     }
 
@@ -2356,7 +2405,7 @@ namespace Yaml
                     }
                     stream << std::string(level, ' ') << "- ";
                     useLevel = false;
-                    if(value.IsSequence() || (value.IsMap() && config.SequenceMapNewline == true))
+                    if(value.IsSequence() || (value.IsMap() && config.SequenceMapNewline))
                     {
                         useLevel = true;
                         stream << "\n";
@@ -2396,7 +2445,7 @@ namespace Yaml
 
 
                     useLevel = false;
-                    if(value.IsScalar() == false || (value.IsScalar() && config.MapScalarNewline))
+                    if(!value.IsScalar() || (value.IsScalar() && config.MapScalarNewline))
                     {
                         useLevel = true;
                         stream << "\n";
@@ -2425,7 +2474,7 @@ namespace Yaml
                 std::string line = "";
                 std::vector<std::string> lines;
                 std::istringstream iss(value);
-                while (iss.eof() == false)
+                while (!iss.eof())
                 {
                     std::getline(iss, line);
                     lines.push_back(line);
@@ -2470,7 +2519,7 @@ namespace Yaml
                     }
                 }
 
-                if(endNewline == false)
+                if(!endNewline)
                 {
                      stream << "-";
                 }
@@ -2483,9 +2532,10 @@ namespace Yaml
                 }
             }
             break;
-
-        default:
-            break;
+            case Node::None:
+                break;
+            default:
+                break;
         }
     }
 
@@ -2548,7 +2598,7 @@ namespace Yaml
             if(token == '"' && (qPos == 0 || input[qPos-1] != '\\'))
             {
                 // Found start quote.
-                if(foundStart == false)
+                if(!foundStart)
                 {
                     start = qPos;
                     foundStart = true;
